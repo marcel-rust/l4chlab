@@ -19,4 +19,4 @@ develop@B760M:~/workspace/l4chlab$ tree -L 3
 
 3 directories, 5 files
 
-on branch master
+on branch develop, continue with 'Useful Things'

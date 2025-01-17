@@ -2,14 +2,21 @@ use axum::http::StatusCode;
 use axum::{Json, Router};
 use axum::routing::get;
 use serde::Serialize;
+use anyhow::Context;
 
 #[tokio::main]
 
-async fn main() {
-    let app = Router::new()
-        .route("/", get(hello_json));
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+async fn main() -> anyhow::Result<()> {
+    let app = Router::new().route("/", get(hello_json));
+
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
+        .await
+        .context("failed to bind TCP listener")?;
+    axum::serve(listener, app)
+        .await
+        .context("axum::serve failed")?;
+
+    Ok(())
 }
 
 #[derive(Serialize)]
