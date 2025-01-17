@@ -1,5 +1,7 @@
 [workspace]
 resolver = "2"
+
 members = [
-	"backend"
+	"backend",
+	"cli_app",
 ]
